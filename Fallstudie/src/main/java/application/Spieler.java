@@ -1,7 +1,5 @@
 package application;
 
-import java.math.BigDecimal;
-
 public class Spieler {
 
 	private String name;
@@ -31,6 +29,10 @@ public class Spieler {
 		this.gewinn = 0;
 		this.umsatz = 0;
 		this.kosten = 0;
+	}
+	
+	public double berechneProzent(double gesamt) {
+		return this.gesamtrating/gesamt;
 	}
   
 	// Methode berechnet das Gesamtrating des Spielers aus den Werten von Image und

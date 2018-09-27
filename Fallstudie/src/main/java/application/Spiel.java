@@ -105,19 +105,33 @@ public class Spiel {
 		}
 	}
 
+	public void bestimmeNachfrage() {
+		int nachfrage = 100000;
+		double faktor = 0;
+
+		do {
+			faktor = Math.random() * 2 + 1;
+		} while (faktor < 0.8 || faktor > 1.2);
+		nachfrage = (int) Math.round(nachfrage * faktor);
+
+	}
+
 	public void beendeRunde(ArrayList<Spieler> spielerList) {
 		this.runde++;
+		double gesamt = 0;
+
 		for (int i = 0; i < spielerList.size(); i++) {
 			spielerList.get(i).berechneGesamtrating();
-			spielerList.get(i).berechneVerkauf();
-			spielerList.get(i).berechneLKosten();
-			spielerList.get(i).berechneUmsatz();
-			spielerList.get(i).berechneGewinn();
+			gesamt = spielerList.get(i).getGesamtrating();
+		}
 
+		for (int i = 0; i < spielerList.size(); i++) {
+			double prozent = spielerList.get(i).berechneProzent(gesamt);
 		}
-		
+
 	}
-		public void startRunde(ArrayList<Spieler> spielerList) {
-			
-		}
+
+	public void startRunde(Spieler spieler) {
+
 	}
+}
