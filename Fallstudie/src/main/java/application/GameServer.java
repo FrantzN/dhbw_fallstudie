@@ -11,10 +11,11 @@ public class GameServer extends WebSocketServer {
 	public GameServer(InetSocketAddress address) {
 		super(address);
 	}
-	
+
 	@Override
 	public void onOpen(WebSocket conn, ClientHandshake handshake) {
-
+		// Get the attachment of this connection
+		System.out.println(conn.getRemoteSocketAddress().getAddress().getHostAddress() + " has connected");
 	}
 
 	@Override
@@ -25,7 +26,7 @@ public class GameServer extends WebSocketServer {
 
 	@Override
 	public void onMessage(WebSocket conn, String message) {
-		System.out.printf("Message: %s\tfrom: %s", message, conn);
+		System.out.printf("Message: %s\tfrom: %s\n", message, conn.getRemoteSocketAddress().getAddress().getHostAddress());
 	}
 
 	@Override
@@ -38,5 +39,7 @@ public class GameServer extends WebSocketServer {
 	public void onStart() {
 		System.out.println("Server started");
 	}
+	
+	
 
 }
