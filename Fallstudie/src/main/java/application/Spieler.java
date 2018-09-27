@@ -6,17 +6,17 @@ public class Spieler {
 
 	private String name;
 	private int id; // Brauchen wir eine ID?
-	private double kasse;
-	private double gesamtrating;
+	private int kasse;
+	private int gesamtrating;
 	private Image image;
 	private Inventar inventar;
 	private Produkt product;
 
 	// Letzte Runde
 	private int verkauf;
-	private double gewinn;
-	private double umsatz;
-	private double kosten;
+	private int gewinn;
+	private int umsatz;
+	private int kosten;
 
 	Spieler(String name, int id) {
 		this.name = name;
@@ -36,7 +36,7 @@ public class Spieler {
 	// Methode berechnet das Gesamtrating des Spielers aus den Werten von Image und
 	// Produkt mit der Gewichtung 1:3
 	public void berechneGesamtrating() {
-		double bewertung = 0;
+		int bewertung = 0;
 
 		bewertung = bewertung + image.berechneBewertungImage();
 		bewertung = bewertung + product.berechneBewertungProdukt() * 3;
@@ -54,7 +54,7 @@ public class Spieler {
 
 	// Methode berechnet die laufenden Kosten
 	public void berechneLKosten() {
-		double kosten = 0;
+		int kosten = 0;
 		int[] maschinen = this.inventar.getMaschinen();
 		int[] personal = this.inventar.getPersonal();
 
@@ -66,13 +66,13 @@ public class Spieler {
 
 	public void berechneUmsatz() {
 		int v = getVerkauf();
-		double p = product.getPreis();
+		int p = product.getPreis();
 		setUmsatz(v * p);
 	}
 
 	public void berechneGewinn() {
-		double g = getUmsatz() - getKosten();
-		double kasse = this.getKasse();
+		int g = getUmsatz() - getKosten();
+		int kasse = this.getKasse();
 		setKasse(kasse + gewinn);
 		setGewinn(g);
 	}
@@ -85,27 +85,27 @@ public class Spieler {
 		this.verkauf = verkauf;
 	}
 
-	public double getGewinn() {
+	public int getGewinn() {
 		return gewinn;
 	}
 
-	public void setGewinn(double gewinn) {
+	public void setGewinn(int gewinn) {
 		this.gewinn = gewinn;
 	}
 
-	public double getUmsatz() {
+	public int getUmsatz() {
 		return umsatz;
 	}
 
-	public void setUmsatz(double umsatz) {
+	public void setUmsatz(int umsatz) {
 		this.umsatz = umsatz;
 	}
 
-	public double getKosten() {
+	public int getKosten() {
 		return kosten;
 	}
 
-	public void setKosten(double kosten) {
+	public void setKosten(int kosten) {
 		this.kosten = kosten;
 	}
 
@@ -117,11 +117,11 @@ public class Spieler {
 		this.name = name;
 	}
 
-	public double getKasse() {
+	public int getKasse() {
 		return kasse;
 	}
 
-	public void setKasse(double kasse) {
+	public void setKasse(int kasse) {
 		this.kasse = kasse;
 	}
 
@@ -141,11 +141,11 @@ public class Spieler {
 		this.inventar = inventar;
 	}
 
-	public double getGesamtrating() {
+	public int getGesamtrating() {
 		return gesamtrating;
 	}
 
-	public void setGesamtrating(double gesamtrating) {
+	public void setGesamtrating(int gesamtrating) {
 		this.gesamtrating = gesamtrating;
 	}
 
