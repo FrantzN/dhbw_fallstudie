@@ -1,7 +1,5 @@
 package application;
 
-import java.math.BigDecimal;
-
 public class Spieler {
 
 	private String name;
@@ -11,6 +9,7 @@ public class Spieler {
 	private Image image;
 	private Inventar inventar;
 	private Produkt product;
+	private int produktivitaet;
 
 	// Letzte Runde
 	private int verkauf;
@@ -26,13 +25,25 @@ public class Spieler {
 		this.image = new Image();
 		this.inventar = new Inventar();
 		this.product = new Produkt();
+		this.produktivitaet = 0;
 
 		this.verkauf = 0;
 		this.gewinn = 0;
 		this.umsatz = 0;
 		this.kosten = 0;
 	}
-  
+
+	public void berechneProduktivitaet() {
+		int[] maschAnzahl = inventar.getMaschinen();
+		int p = maschAnzahl[0] * 10 + maschAnzahl[1] * 20 + maschAnzahl[2] * 30;
+		
+		setProduktivitaet(p);
+	}
+	
+	public double berechneProzent(double gesamt) {
+		return this.gesamtrating / gesamt;
+	}
+
 	// Methode berechnet das Gesamtrating des Spielers aus den Werten von Image und
 	// Produkt mit der Gewichtung 1:3
 	public void berechneGesamtrating() {
@@ -75,6 +86,14 @@ public class Spieler {
 		int kasse = this.getKasse();
 		setKasse(kasse + gewinn);
 		setGewinn(g);
+	}
+	
+	public int getProduktivitaet() {
+		return produktivitaet;
+	}
+	
+	public void setProduktivitaet(int produktivitaet) {
+		this.produktivitaet = produktivitaet;
 	}
 
 	public int getVerkauf() {
