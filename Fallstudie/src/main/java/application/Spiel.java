@@ -105,7 +105,7 @@ public class Spiel {
 		}
 	}
 
-	public void bestimmeNachfrage() {
+	public int bestimmeNachfrage() {
 		int nachfrage = 100000;
 		double faktor = 0;
 
@@ -114,6 +114,7 @@ public class Spiel {
 		} while (faktor < 0.8 || faktor > 1.2);
 		nachfrage = (int) Math.round(nachfrage * faktor);
 
+		return nachfrage;
 	}
 
 	public void beendeRunde(ArrayList<Spieler> spielerList) {
@@ -122,11 +123,28 @@ public class Spiel {
 
 		for (int i = 0; i < spielerList.size(); i++) {
 			spielerList.get(i).berechneGesamtrating();
-			gesamt = spielerList.get(i).getGesamtrating();
+			gesamt += spielerList.get(i).getGesamtrating();
 		}
 
+		// Bestimmen der gesamten Nachfrage und Aufteilen der Nachfrage auf die Spieler
 		for (int i = 0; i < spielerList.size(); i++) {
-			double prozent = spielerList.get(i).berechneProzent(gesamt);
+			spielerList.get(i).berechneProduktivitaet();
+			double prozent = spielerList.get(i).berechneProzent(gesamt);			
+			int prod = spielerList.get(i).getProduktivitaet();
+			int nachfrage = bestimmeNachfrage();
+
+			int anteil = (int) prozent * nachfrage;
+			if (anteil > prod) {
+				spielerList.get(i).setVerkauf(prod);
+			}
+			else {
+				spielerList.get(i).setVerkauf(anteil);
+			}
+			
+			spielerList.get(i).berechneUmsatz();
+			spielerList.get(i).berechneLKosten();
+			spielerList.get(i).berechneGewinn();
+			
 		}
 
 	}
