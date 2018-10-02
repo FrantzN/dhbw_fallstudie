@@ -55,13 +55,7 @@ public class Spieler {
 		setGesamtrating(bewertung);
 	}
 
-	public void berechneVerkauf() {
-		int v = 0;
 
-		// Hier muss mit Nachfrage gerechnet werden
-
-		setVerkauf(v);
-	}
 
 	// Methode berechnet die laufenden Kosten
 	public void berechneLKosten() {
